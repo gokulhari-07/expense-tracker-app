@@ -1,12 +1,21 @@
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 final formatter=DateFormat.yMd();
 
+enum Category { food, travel, leisure, work }
+
+const categoryIcons={
+  Category.food: Icons.lunch_dining,
+  Category.travel:Icons.flight_takeoff,
+  Category.leisure:Icons.movie,
+  Category.work:Icons.work
+};
+
 class ExpenseModel {
-   ExpenseModel({required this.title, required this.amount, required this.date}):id=UniqueKey().toString();
- //Why prfomrance is not affected if we dont use const for the above constructor due to dyamic id?
+   ExpenseModel({required this.title, required this.amount, required this.date, required this.category}):id=UniqueKey().toString();
+ //Why prfomance is not affected if we dont use const for the above constructor due to dyamic id?
  // ✅ Reality (very important)
 // For model/data classes, const provides almost zero real-world performance benefit.
 // Why?
@@ -45,11 +54,29 @@ class ExpenseModel {
   final double amount;
   final DateTime date;
   final String id;
+  final Category category;
 
   String get formattedDate { //Getters are basically "computed properties" => Properties that are
   // dynamically derived, based on other class properties. Here the type of the getter we have given is 
   //String, so the getter should return a String value.
   return formatter.format(date);
   }
+
+}
+
+class ExpenseBucket {
+   ExpenseBucket.forCategory(List<ExpenseModel> allExpenses, this.category):expenseOfEachCategories=allExpenses.where((expense) => expense.category==category).toList();
+
+  final Category category;
+  final List<ExpenseModel> expenseOfEachCategories;
+
+  double get totalExpenses {
+    double sum=0;
+    for (final expenseOfEachCategory in expenseOfEachCategories){
+      sum+=expenseOfEachCategory.amount;
+    }
+    return sum;
+  }
+
 
 }
