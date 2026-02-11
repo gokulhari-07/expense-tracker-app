@@ -61,7 +61,7 @@ predictable, and maintainable.
 
 ## 📸 Screenshots
 
-| Home Screen (Mobile) | Home Screen (Desktop) | Dark Theme |
+| Home Screen (Portrait) | Home Screen (Landscape) | Dark Theme |
 |----------------------|-----------------------|-----------------------|
 | ![](screenshots/home-mobile.jpg) | ![](screenshots/home-desktop.jpg) |![](screenshots/dark-theme-home-desktop.jpg) | 
 
@@ -93,5 +93,5 @@ predictable, and maintainable.
 
 ## 👨‍💻 Author
 
-**<GOKUL HARI>**  
+**GOKUL HARI**    
 Software Engineer
