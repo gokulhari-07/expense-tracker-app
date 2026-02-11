@@ -65,9 +65,9 @@ predictable, and maintainable.
 |----------------------|-----------------------|-----------------------|
 | ![](screenshots/home-mobile.jpg) | ![](screenshots/home-desktop.jpg) |![](screenshots/dark-theme-home-desktop.jpg) | 
 
-| Add Expense Sheet | Dark Theme |
+| Add Expense Sheet (Portrait) | Add Expense Sheet (Landscape)  | Dark Theme |
 |-------------------|------------|
-| ![](screenshots/add-expense.jpg) | ![](screenshots/dark-theme-add-expense.jpg) |
+| ![](screenshots/add-expense.jpg) | ![](screenshots/add-expense-desktop.jpg) | ![](screenshots/dark-theme-add-expense.jpg) |
 
 ---
 
