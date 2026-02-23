@@ -16,15 +16,15 @@ class Chart extends StatelessWidget {
     ];
   }
 
-  double get maxTotalExpense {
-    double maxTotalExpense = 0;
+  double get highestTotalExpensePerCategory {
+    double highestTotalExpensePerCategory = 0;
 
     for (final bucket in buckets) {
-      if (bucket.totalExpenses > maxTotalExpense) {
-        maxTotalExpense = bucket.totalExpenses;
+      if (bucket.totalExpensesPerCategory > highestTotalExpensePerCategory) {
+        highestTotalExpensePerCategory = bucket.totalExpensesPerCategory;
       }
     }
-    return maxTotalExpense;
+    return highestTotalExpensePerCategory;
   }
 
   @override
@@ -53,9 +53,9 @@ class Chart extends StatelessWidget {
                 children: buckets
                     .map(
                       (bucket) => ChartBar(
-                        fill: bucket.totalExpenses == 0
+                        fill: bucket.totalExpensesPerCategory == 0
                             ? 0
-                            : bucket.totalExpenses / maxTotalExpense,
+                            : bucket.totalExpensesPerCategory / highestTotalExpensePerCategory,
                       ),
                     )
                     .toList(),

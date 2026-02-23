@@ -1,3 +1,4 @@
+import 'package:expense_tracker_self/data/registered_expense_data.dart';
 import 'package:expense_tracker_self/models/expense_model.dart';
 import 'package:expense_tracker_self/widgets/add_expense_sheet.dart';
 import 'package:expense_tracker_self/widgets/chart.dart';
@@ -12,44 +13,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<ExpenseModel> _registeredExpenses = [
-    ExpenseModel(
-      title: "Flutter Course",
-      amount: 19.99,
-      date: DateTime.now(),
-      category: Category.work,
-    ),
-    ExpenseModel(
-      title: "Bangalore",
-      amount: 15,
-      date: DateTime.now(),
-      category: Category.travel,
-    ),
-    ExpenseModel(
-      title: "Biriyani",
-      amount: 10,
-      date: DateTime.now(),
-      category: Category.food,
-    ),
-    ExpenseModel(
-      title: "Beach",
-      amount: 5,
-      date: DateTime.now(),
-      category: Category.leisure,
-    ),
-  ];
 
   void _addedExpense(ExpenseModel expense) {
     setState(() {
-      _registeredExpenses = [..._registeredExpenses, expense];
+      registeredExpenses = [...registeredExpenses, expense];
     });
   }
 
   void _removeExpense(ExpenseModel removedExpense) {
-    final expenseIndex = _registeredExpenses.indexOf(removedExpense);
+    final expenseIndex = registeredExpenses.indexOf(removedExpense);
     setState(() {
-      _registeredExpenses.remove(removedExpense);
+      registeredExpenses.remove(removedExpense);
     });
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 3),
@@ -58,12 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
           label: "Undo",
           onPressed: () {
             setState(() {
-              _registeredExpenses.insert(expenseIndex, removedExpense);
+              registeredExpenses.insert(expenseIndex, removedExpense);
             });
           },
         ),
       ),
     );
+   
   }
 
   @override
@@ -76,9 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
 
-    if (_registeredExpenses.isNotEmpty) {
+    if (registeredExpenses.isNotEmpty) {
       mainContent = ListView.builder(
-        itemCount: _registeredExpenses.length,
+        itemCount: registeredExpenses.length,
         itemBuilder: (context, index) => Dismissible(
           background: Container(
             color: Theme.of(context).colorScheme.error.withValues(
@@ -89,10 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
               blue: 0.3,
             ),
           ),
-          key: ValueKey(_registeredExpenses[index].id),
+          key: ValueKey(registeredExpenses[index].id),
           onDismissed: (direction) =>
-              _removeExpense(_registeredExpenses[index]),
-          child: ExpenseCard(expense: _registeredExpenses[index]),
+              _removeExpense(registeredExpenses[index]),
+          child: ExpenseCard(expense: registeredExpenses[index]),
         ),
       );
     }
@@ -123,13 +100,13 @@ class _HomeScreenState extends State<HomeScreen> {
         child: width < 600
             ? Column(
                 children: [
-                  Chart(expenses: _registeredExpenses),
+                  Chart(expenses: registeredExpenses),
                   Expanded(child: mainContent),
                 ],
               )
             : Row(
                 children: [
-                  Expanded(child: Chart(expenses: _registeredExpenses)),
+                  Expanded(child: Chart(expenses: registeredExpenses)),
                   const SizedBox(width: 10),
                   Expanded(child: mainContent),
                 ],

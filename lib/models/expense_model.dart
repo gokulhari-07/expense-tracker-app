@@ -70,10 +70,10 @@ class ExpenseBucket {
   final Category category;
   final List<ExpenseModel> expenseOfEachCategories;
 
-  double get totalExpenses {
+  double get totalExpensesPerCategory {
     double sum=0;
-    for (final expenseOfEachCategory in expenseOfEachCategories){
-      sum+=expenseOfEachCategory.amount;
+    for (final expense in expenseOfEachCategories) {
+      sum+=expense.amount;
     }
     return sum;
   }
